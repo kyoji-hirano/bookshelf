@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'books/index'
+  get 'books/show'
+  get 'books/new'
+  get 'books/edit'
   get 'sessions/new'
   get 'users/new'
   root 'static_pages#home'
