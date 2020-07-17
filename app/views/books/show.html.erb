@@ -21,6 +21,11 @@
         </tr>
 
         <tr>
+          <th><%= Book.human_attribute_name(:image) %></th>
+          <td><%= image_tag @book.image, height: 300 if @book.image.attached? %></td>
+        </tr>
+
+        <tr>
           <th><%= Book.human_attribute_name(:description) %></th>
           <td><%= simple_format(h(@book.description), {}, sanitize: false, wrapper_tag: "div")%></td>
         </tr>
