@@ -1,0 +1,52 @@
+<% provide(:title, 'The details') %>
+<h1><%= @group.name%></h1>
+
+<div class="row">
+  <aside class="col-md-4">
+    <div class="col-md-6 col-md-offset-3">
+
+      <div class="nav jastify-content-end">
+        <li><%= link_to "All groups",   groups_path %></li>
+      </div>
+
+      <table class="table table-hover"> 
+        <tbody>
+          <tr>
+            <th><%= Group.human_attribute_name(:id) %></th>
+            <td><%= @group.id%></td>
+          </tr>
+
+          <tr>
+            <th><%= Group.human_attribute_name(:image) %></th>
+            <td><%= image_tag @group.image, height: 300 if @group.image.attached? %></td>
+          </tr>
+
+          <tr>
+            <th><%= Group.human_attribute_name(:member) %></th>
+            <td class="group_members">
+              <% @members.each do |member| %>
+                <li>
+                  <%= gravatar_for member, size: 50 %>
+                  <%= member.name %>
+                </li>
+              <% end %>
+            </td>
+          </tr>
+
+          <tr>
+            <th><%= Group.human_attribute_name(:created_at) %></th>
+            <td><%= @group.created_at%></td>
+          </tr>
+
+
+
+        </tbody>
+      </table>
+      <div>
+        <%= link_to "edit", edit_group_path %>
+        <%= link_to "delete", @group, method: :delete, data: { confirm: "You sure?" } %>
+      </div>
+    </div>
+
+  </aside>
+</div>

@@ -1,0 +1,17 @@
+<%= form_with(model: group, local: true) do |f| %>
+
+  <%= f.label :name %>
+  <%= f.text_field :name, class: 'form-control' , id: 'group_name'%>
+
+  <ul class="group_members">
+    <%= f.label :member %>
+    <%= f.collection_check_boxes :user_ids, User.all, :id, :name %>
+  </ul>
+
+
+
+  <%= f.label :image %>
+  <%= f.file_field :image, class: 'form-control' %>
+
+  <%= f.submit nil, class: "btn btn-primary" %>
+<% end %>
