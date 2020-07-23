@@ -3,50 +3,62 @@
 
 <div class="row">
   <aside class="col-md-4">
-    <div class="col-md-6 col-md-offset-3">
 
-      <div class="nav jastify-content-end">
-        <li><%= link_to "All groups",   groups_path %></li>
-      </div>
+    <div class="nav jastify-content-end">
+      <li><%= link_to "All groups",   groups_path %></li>
+    </div>
 
-      <table class="table table-hover"> 
-        <tbody>
-          <tr>
-            <th><%= Group.human_attribute_name(:id) %></th>
-            <td><%= @group.id%></td>
-          </tr>
+    <table class="table table-hover"> 
+      <tbody>
+        <tr>
+          <th><%= Group.human_attribute_name(:id) %></th>
+          <td><%= @group.id%></td>
+        </tr>
 
-          <tr>
-            <th><%= Group.human_attribute_name(:image) %></th>
-            <td><%= image_tag @group.image, height: 300 if @group.image.attached? %></td>
-          </tr>
+        <tr>
+          <th><%= Group.human_attribute_name(:image) %></th>
+          <%if @group.image.attached? %>
+            <td><%= image_tag @group.image, height: 200 %></td>
+          <%else%>
+            <td><%= image_tag "no_image.jpg", height: 200 %></td>
+          <%end%>
+        </tr>
 
-          <tr>
-            <th><%= Group.human_attribute_name(:member) %></th>
-            <td class="group_members">
-              <% @members.each do |member| %>
-                <li>
-                  <%= gravatar_for member, size: 50 %>
-                  <%= member.name %>
-                </li>
-              <% end %>
-            </td>
-          </tr>
+        <tr>
+          <th><%= Group.human_attribute_name(:member) %></th>
+          <td class="group_members">
+            <% @members.each do |member| %>
+              <li>
+                <%= gravatar_for member, size: 40 %>
+                <%= member.name %>
+              </li>
+            <% end %>
+          </td>
+        </tr>
 
-          <tr>
-            <th><%= Group.human_attribute_name(:created_at) %></th>
-            <td><%= @group.created_at%></td>
-          </tr>
+        <tr>
+          <th><%= Group.human_attribute_name(:created_at) %></th>
+          <td><%= @group.created_at%></td>
+        </tr>
 
 
 
-        </tbody>
-      </table>
-      <div>
-        <%= link_to "edit", edit_group_path %>
-        <%= link_to "delete", @group, method: :delete, data: { confirm: "You sure?" } %>
-      </div>
+      </tbody>
+    </table>
+    <div>
+      <%= link_to "edit", edit_group_path %>
+      <%= link_to "delete", @group, method: :delete, data: { confirm: "You sure?" } %>
     </div>
 
   </aside>
+
+  <div class="col-md-8">
+    <% if @group.books.any? %>
+      <h3>Books (<%= @group.books.count %>)</h3>
+      <ol class="books">
+        <%= render partial: '/books/books', locals: {books: @books} %>
+      </ol>
+      
+    <% end %>
+  </div>
 </div>
