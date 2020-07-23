@@ -11,7 +11,7 @@ User.create!(name:  "Example User",
              password_confirmation: "foobar",
              admin: true)
 
-99.times do |n|
+30.times do |n|
   name  = Faker::Name.name
   email = "example-#{n+1}@railstutorial.org"
   password = "password"
@@ -19,4 +19,13 @@ User.create!(name:  "Example User",
                email: email,
                password:              password,
                password_confirmation: password)
+end
+
+Group.create!(name: "SAMPLE GROUP",
+              user_ids: [1, 2, 3, 4, 5])
+
+5.times do |n|
+  Book.create!(name: "sample_book_#{n+1}",
+               description: "sample",
+               group_id: "1")
 end
