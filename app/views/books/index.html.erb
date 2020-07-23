@@ -18,7 +18,11 @@
   <tbody>
     <% @books.each do |book| %>
       <tr> 
-        <td><%= link_to image_tag( book.image, height: 100), book %></td>
+        <%if book.image.attached?%>
+          <td><%= link_to image_tag( book.image, height: 100), book %></td>
+        <%else%>
+          <td><%= link_to image_tag( "no_image.jpg", height: 100), book %></td>
+        <%end%>
         <td><%= link_to book.name, book %> </td>
         <td><%= book.created_at %> </td>
         <td> 

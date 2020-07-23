@@ -21,8 +21,17 @@
         </tr>
 
         <tr>
+          <th><%= Book.human_attribute_name(:group_id) %></th>
+          <td><%= @book.group_id%></td>
+        </tr>
+
+        <tr>
           <th><%= Book.human_attribute_name(:image) %></th>
-          <td><%= image_tag @book.image, height: 300 if @book.image.attached? %></td>
+          <%if @book.image.attached?%>
+            <td><%= image_tag @book.image, height: 300 %></td>
+          <%else%>
+            <td><%= image_tag "no_image.jpg", height: 300 %></td>
+          <%end%>
         </tr>
 
         <tr>
