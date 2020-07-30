@@ -1,5 +1,6 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy]
+  before_action :set_group, only: [:new, :show, :edit, :update, :destroy, :create]
 
   def index
     @books = Book.all
@@ -17,10 +18,10 @@ class BooksController < ApplicationController
   end
 
   def create
-    @book = Book.new(book_params)
+    @book = @group.books.new(book_params)
 
     if @book.save
-      redirect_to books_url, notice: "「#{@book.name}を登録しました。」"
+      redirect_to group_url(@group), notice: "「#{@book.name}を登録しました。」"
     else
       render :new
     end
@@ -28,12 +29,12 @@ class BooksController < ApplicationController
 
   def update
     @book.update!(book_params)
-    redirect_to books_url, notice: "「#{@book.name}」を更新しました。"
+    redirect_to group_url(@group), notice: "「#{@book.name}」を更新しました。"
   end
 
   def destroy
     @book.destroy
-    redirect_to books_url, notice: "「#{@book.name}」を削除しました。"
+    redirect_to group_url(@group), notice: "「#{@book.name}」を削除しました。"
   end
 
   private
@@ -44,6 +45,10 @@ class BooksController < ApplicationController
 
   def set_book
     @book = Book.find(params[:id])
+  end
+
+  def set_group
+    @group = Group.find(params[:group_id])
   end
 
 
