@@ -21,11 +21,32 @@ User.create!(name:  "Example User",
                password_confirmation: password)
 end
 
-first_group = Group.create!(name: "SAMPLE GROUP",
-                      user_ids: [1, 2, 3, 4, 5])
+my_account = User.create!(name:  "Hirano",
+                          email: "gg.11sstar@gmail.com",
+                          password:              "passpass",
+                          password_confirmation: "passpass",
+                          admin: true)
+
+first_group = Group.create!(name: "SAMPLE GROUP", user_ids: [1, 2, 3, 4, 5])
 
 5.times do |n|
   Book.create!(name: "sample_book_#{n+1}",
                description: "sample",
                group_id: first_group.id)
+end
+
+public_group = Group.create!(name: "PUBLIC GROUP", user_ids: (1..21).to_a)
+
+15.times do |n|
+Book.create!(name: "sample_book_#{n+6}",
+             description: "sample",
+             group_id: public_group.id)
+end
+
+private_group = Group.create!(name: "Hirano's BOOKS", user_ids: [my_account.id])
+
+5.times do |n|
+  Book.create!(name: "sample_book_#{n+21}",
+               description: "sample",
+               group_id: private_group.id)
 end
