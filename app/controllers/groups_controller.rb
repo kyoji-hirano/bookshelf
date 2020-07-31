@@ -17,12 +17,6 @@ class GroupsController < ApplicationController
   def edit
   end
 
-
-  def update
-    @group.update!(group_params)
-    redirect_to groups_url, notice: "「#{@group.name}」を更新しました。"
-  end
-
   def new
     @group = Group.new
     @group.users << current_user
@@ -32,7 +26,7 @@ class GroupsController < ApplicationController
     @group = Group.new(group_params)
     
     if @group.save
-      redirect_to root_path, notice: 'グループを作成しました'
+      redirect_to group_url(@group), notice: "グループ「#{@group.name}」を作成しました"
     else
       render :new
     end
@@ -40,7 +34,7 @@ class GroupsController < ApplicationController
 
   def update 
     if @group.update(group_params)
-      redirect_to root_path, notice: 'グループを更新しました'
+      redirect_to group_url(@group), notice: "グループ「#{@group.name}」を更新しました"
     else
       render :edit
     end
@@ -48,7 +42,7 @@ class GroupsController < ApplicationController
 
   def destroy
     @group.destroy
-    redirect_to groups_url, notice: "「#{@group.name}」を削除しました。"
+    redirect_to groups_url, notice: "グループ「#{@group.name}」を削除しました。"
   end
 
   private
