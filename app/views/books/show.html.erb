@@ -7,19 +7,10 @@
 
     <table class="table table-hover"> 
       <tbody>
-        <tr>
-          <th><%= Book.human_attribute_name(:id) %></th>
-          <td><%= @book.id%></td>
-        </tr>
 
         <tr>
           <th><%= Book.human_attribute_name(:name) %></th>
           <td><%= @book.name%></td>
-        </tr>
-
-        <tr>
-          <th><%= Book.human_attribute_name(:group_id) %></th>
-          <td><%= @book.group_id%></td>
         </tr>
 
         <tr>
@@ -40,6 +31,25 @@
           <th><%= Book.human_attribute_name(:created_at) %></th>
           <td><%= @book.created_at%></td>
         </tr>
+
+        <tr>
+          <th><%= Book.human_attribute_name(:id) %></th>
+          <td><%= @book.id%></td>
+        </tr>
+
+        <tr>
+          <th><%= Book.human_attribute_name(:group_id) %></th>
+          <td><%= @book.group.name%></td>
+        </tr>
+
+        <tr>
+          <th></th>
+          <td>
+            <%= link_to 'edit', edit_group_book_path(@group, @book), class: 'btn btn-primary mr-3' %> 
+            <%= link_to 'delete', group_book_path(@group, @book), method: :delete, data: { confirm: "「#{@book.name}」を削除します。よろしいですか？"}, class: 'btn btn-danger' %> 
+          </td>
+        </tr>
+
       </tbody>
     </table>
 
