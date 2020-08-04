@@ -1,6 +1,7 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy]
   before_action :set_group, only: [:new, :show, :edit, :update, :destroy, :create]
+  before_action :books_group_member?, only: [:new, :show, :edit, :update, :destroy, :create]
 
   def index
     @books = Book.all
@@ -50,6 +51,9 @@ class BooksController < ApplicationController
   def set_group
     @group = Group.find(params[:group_id])
   end
-
+  
+  def books_group_member?
+    redirect_to group_url(@group) unless @book.group.user_ids.include?(current_user.id)
+  end
 
 end
