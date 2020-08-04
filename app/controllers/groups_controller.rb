@@ -1,17 +1,12 @@
 class GroupsController < ApplicationController
   before_action :set_group, only: [:show, :edit, :update, :destroy]
+  before_action :group_member?, only: [:show, :edit, :update, :destroy]
 
   def index
     @groups = Group.all
   end
 
   def show
-    @members = []
-    @group.user_ids.each do |user_id|
-      member = User.find_by(id: user_id)
-      @members << member
-    end
-    @books = @group.books
   end
 
   def edit
@@ -53,6 +48,10 @@ class GroupsController < ApplicationController
 
   def set_group 
     @group = Group.find(params[:id])
+  end
+
+  def group_member?
+    redirect_to root_path unless @group.user_ids.include?(current_user.id)
   end
 
 end
