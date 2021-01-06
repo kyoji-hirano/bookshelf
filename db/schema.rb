@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_21_134335) do
+ActiveRecord::Schema.define(version: 2020_12_17_050327) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,10 +39,18 @@ ActiveRecord::Schema.define(version: 2020_07_21_134335) do
   create_table "books", force: :cascade do |t|
     t.string "name"
     t.text "description"
+    t.bigint "group_id", null: false
+    t.boolean "is_rentaled"
+    t.bigint "category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "group_id", null: false
     t.index ["group_id"], name: "index_books_on_group_id"
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "group_users", force: :cascade do |t|
@@ -56,15 +64,30 @@ ActiveRecord::Schema.define(version: 2020_07_21_134335) do
 
   create_table "groups", force: :cascade do |t|
     t.string "name", null: false
+    t.string "code", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_groups_on_name", unique: true
+  end
+
+  create_table "review_comments", force: :cascade do |t|
+    t.text "content"
+    t.bigint "user_id"
+    t.bigint "book_id"
+    t.datetime "date"
+    t.bigint "grade"
+    t.bigint "reply_to"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_review_comments_on_book_id"
+    t.index ["user_id"], name: "index_review_comments_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "name", null: false
     t.string "email", null: false
     t.string "password_digest", null: false
+    t.string "user_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "admin", default: false, null: false
@@ -75,4 +98,6 @@ ActiveRecord::Schema.define(version: 2020_07_21_134335) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "group_users", "groups"
   add_foreign_key "group_users", "users"
+  add_foreign_key "review_comments", "books"
+  add_foreign_key "review_comments", "users"
 end

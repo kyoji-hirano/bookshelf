@@ -1,6 +1,6 @@
 class GroupsController < ApplicationController
   before_action :set_group, only: [:show, :edit, :update, :destroy]
-  before_action :group_member?, only: [:show, :edit, :update, :destroy]
+  # before_action :group_member?, only: [:show, :edit, :update, :destroy]
 
   def index
     @groups = Group.all

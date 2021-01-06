@@ -8,7 +8,9 @@
       </h1>
     </section>
   </aside>
-
+<%
+=begin
+%>
   <div class="col-md-8">
     <% if @user.groups.any? %>
       <h3>Groups (<%= @user.groups.count %>)</h3>
@@ -26,5 +28,8 @@
         </ul>
     <% end %>
   </div>
+<%
+=end
+%>
 
 </div>

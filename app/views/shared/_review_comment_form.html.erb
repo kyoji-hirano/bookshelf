@@ -1,0 +1,9 @@
+<%= form_for(@review_comment) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <div class="field">
+    <%= f.hidden_field :user_id, :value => @user.id %>
+    <%= f.text_area :content, placeholder: "コメントを入力" %>
+    <%= f.select :book_id, @books, { include_blank: "選択して下さい" }%>
+  </div>
+  <%= f.submit "Post", class: "btn btn-primary" %>
+<% end %>

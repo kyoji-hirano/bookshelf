@@ -1,13 +1,14 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy]
   before_action :set_group, only: [:new, :show, :edit, :update, :destroy, :create]
-  before_action :books_group_member?, only: [:new, :show, :edit, :update, :destroy, :create]
+  # before_action :books_group_member?, only: [:new, :show, :edit, :update, :destroy, :create]
 
   def index
     @books = Book.all
   end
 
   def show
+    @comments = ReviewComment.where(book_id: @book.id)
 
   end
 
@@ -41,7 +42,7 @@ class BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:name, :description, :image)
+    params.require(:book).permit(:name, :description, :image, :group_id, :category_id)
   end
 
   def set_book

@@ -1,0 +1,47 @@
+<% provide(:title, 'Comments') %>
+<h1>Comments</h1>
+
+<% if logged_in? %>
+  <div class="row">
+    <aside class="col-md-4">
+      <section class="user_info">
+        <%= render 'shared/user_info' %>
+      </section>
+      <section class="comment_form">
+        <%= render 'shared/review_comment_form' %>
+      </section>
+    </aside>
+  </div>
+<% end %>
+
+<div class="mp-3"> </div>
+<table class="table table-hover"> 
+  <thead class="thead-default"> 
+    <tr> 
+      <th>投稿者 </th>
+      <th>コメント </th>
+      <th>投稿日 </th>
+      <th> </th>
+      
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @comments.each do |comment| %>
+      <tr> 
+        <td>
+          <%= gravatar_for comment.user, size: 40 %>
+          <%= link_to comment.user.name, comment.user %>
+        </td>
+        <td>
+          <%= comment.book.name%><br>
+          <%= comment.content%>
+        </td>
+        <td><%= comment.created_at %> </td>
+        <td> 
+          <%= link_to '削除', review_comment_url(comment), method: :delete,　data: { confirm: "よろしいですか？"}, class: 'btn btn-danger' %> 
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -20,17 +20,7 @@
           <%end%>
         </tr>
 
-        <tr>
-          <th><%= Group.human_attribute_name(:members) %>(<%= @group.users.count %>)</th>
-          <td class="group_members">
-            <% @group.users.each do |member| %>
-              <li>
-                <%= gravatar_for member, size: 40 %>
-                <%= link_to member.name, member %>
-              </li>
-            <% end %>
-          </td>
-        </tr>
+
 
         <tr>
           <th><%= Group.human_attribute_name(:created_at) %></th>
