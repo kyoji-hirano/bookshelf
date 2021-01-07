@@ -9,7 +9,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @groups = @user.groups
+    @group = Group.find(@user.group_id)
   end
 
   def new
@@ -50,7 +50,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation, :user_code)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :user_code, :group_id)
   end
 
   # beforeアクション

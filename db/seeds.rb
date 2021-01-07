@@ -12,34 +12,37 @@
 #   ActiveRecord::Base.connection.execute("TRUNCATE #{table}")
 # end
 
+#グループ1
+first_group = Group.create!(name: "SAMPLE GROUP", code: "g01")
+
 #ユーザー
 User.create!(name:  "Example User",
-             email: "example@railstutorial.org",
-             password:              "foobar",
-             password_confirmation: "foobar",
-             admin: true,
-             user_code: "admin")
+  email: "example@railstutorial.org",
+  password:              "foobar",
+  password_confirmation: "foobar",
+  admin: true,
+  user_code: "admin",
+  group_id: first_group.id)
 
 20.times do |n|
-  name  = Faker::Name.name
-  email = "example-#{n+1}@railstutorial.org"
-  password = "password"
-  User.create!(name:  name,
-               email: email,
-               password:              password,
-               password_confirmation: password,
-               user_code: "u#{n+1}")
+name  = Faker::Name.name
+email = "example-#{n+1}@railstutorial.org"
+password = "password"
+User.create!(name:  name,
+    email: email,
+    password:              password,
+    password_confirmation: password,
+    user_code: "u#{n+1}",
+    group_id: first_group.id)
 end
 
 my_account = User.create!(name:  "Hirano",
-                          email: "gg.11sstar@gmail.com",
-                          password:              "passpass",
-                          password_confirmation: "passpass",
-                          admin: true,
-                          user_code: "me")
-
-#グループ1
-first_group = Group.create!(name: "SAMPLE GROUP", code: "g01")
+               email: "gg.11sstar@gmail.com",
+               password:              "passpass",
+               password_confirmation: "passpass",
+               admin: true,
+               user_code: "me",
+               group_id: first_group.id)
 
 5.times do |n|
   Book.create!(name: "sample_book_#{n+1}",

@@ -2,7 +2,12 @@
 
   <%= f.label :name %>
   <%= f.text_field :name, class: 'form-control' , id: 'group_name'%>
+  <%= f.label :code %>
+  <%= f.text_field :code, class: 'form-control' , id: 'group_code'%>
 
+<%
+=begin
+%>
   <%= f.label :member %>
   <ul class="group_members">
     <%= f.collection_check_boxes(:user_ids, User.all, :id, :name) do |b| %>
@@ -13,6 +18,9 @@
       </div>
     <% end %>
   </ul>
+<%
+=end
+%>
 
   <%= f.label :image %>
   <%= f.file_field :image, class: 'form-control' %>
