@@ -5,7 +5,7 @@
   <aside class="col-md-4">
 
     <div class="nav jastify-content-end">
-      <li><%= link_to "New Book",   new_group_book_path(@group) %></li>
+      <li><%= link_to "New Book",   new_book_path %></li>
     </div>
 
     <table class="table table-hover"> 
@@ -41,6 +41,9 @@
 
   </aside>
 
+<%
+=begin
+%>
   <div class="col-md-8">
     <% if @group.books.any? %>
       <h3>Books (<%= @group.books.count %>)</h3>
@@ -50,4 +53,7 @@
       
     <% end %>
   </div>
+<%
+=end
+%>
 </div>

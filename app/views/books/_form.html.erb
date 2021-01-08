@@ -6,6 +6,8 @@
   <%= f.label :description %>
   <%= f.text_field :description, rows: 5, class: 'form-control' , id: 'book_description'%>
 
+  <%= f.hidden_field :group_id, :value => current_user.group_id %>
+
   <%= f.label :image %>
   <%= f.file_field :image, class: 'form-control' %>
 

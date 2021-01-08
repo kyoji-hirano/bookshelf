@@ -56,8 +56,8 @@
         <tr>
           <th></th>
           <td>
-            <%= link_to 'edit', edit_group_book_path(@group, @book), class: 'btn btn-primary mr-3' %> 
-            <%= link_to 'delete', group_book_path(@group, @book), method: :delete, data: { confirm: "「#{@book.name}」を削除します。よろしいですか？"}, class: 'btn btn-danger' %> 
+            <%= link_to 'edit', edit_book_path(@book), class: 'btn btn-primary mr-3' %> 
+            <%= link_to 'delete', book_path(@book), method: :delete, data: { confirm: "「#{@book.name}」を削除します。よろしいですか？"}, class: 'btn btn-danger' %> 
           </td>
         </tr>
 

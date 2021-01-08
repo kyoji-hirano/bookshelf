@@ -10,14 +10,14 @@
     <% books.each do |book| %>
       <tr> 
         <%if book.image.attached?%>
-          <td><%= link_to image_tag( book.image, height: 100), group_book_path(@group, book) %></td>
+          <td><%= link_to image_tag( book.image, height: 100), book_path(book) %></td>
         <%else%>
-          <td><%= link_to image_tag( "no_image.jpg", height: 100), group_book_path(@group, book) %></td>
+          <td><%= link_to image_tag( "no_image.jpg", height: 100), book_path(book) %></td>
         <%end%>
-        <td><%= link_to book.name, group_book_path(@group, book) %> </td>
+        <td><%= link_to book.name, book_path(book) %> </td>
         <td> 
-          <%= link_to 'edit', edit_group_book_path(@group, book), class: 'btn btn-primary mr-3' %> 
-          <%= link_to 'delete', group_book_path(@group, book), method: :delete, data: { confirm: "「#{book.name}」を削除します。よろしいですか？"}, class: 'btn btn-danger' %> 
+          <%= link_to 'edit', edit_book_path(book), class: 'btn btn-primary mr-3' %> 
+          <%= link_to 'delete', book_path(book), method: :delete, data: { confirm: "「#{book.name}」を削除します。よろしいですか？"}, class: 'btn btn-danger' %> 
         </td>
       </tr>
     <% end %>
